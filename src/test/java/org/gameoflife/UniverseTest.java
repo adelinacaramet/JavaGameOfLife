@@ -6,20 +6,33 @@ import org.junit.Test;
 
 public class UniverseTest {
 
-    private Boolean[][] cells;
     private Boolean[][] initialState = new Boolean[][]{
                 {true, true, true},
                 {false, false, true},
                 {false, true, true},
         };
 
+    private Boolean[][] newState = new Boolean[][]{
+                {true, true, true},
+                {false, false, true},
+                {false, true, true},
+        };
+    private Universe universe;
+
     @Before
     public void init() {
-        cells = initialState;
+        universe = new Universe(initialState);
+    }
+
+    @Test
+    public void afterTheTurnCellsHaveNewState() {
+        universe.turn();
+        Assert.assertArrayEquals(newState, universe.getCells());
     }
 
     @Test
     public void cellsHaveInitialState() {
-        Assert.assertArrayEquals(initialState, cells);
+        Assert.assertArrayEquals(initialState, universe.getCells());
     }
+
 }
