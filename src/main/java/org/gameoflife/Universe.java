@@ -18,6 +18,12 @@ public class Universe {
     }
 
     public boolean getCell(int row, int column) {
+        if (row < 0 || column < 0) {
+            return false;
+        }
+        if (row >= cells.length || column >= cells[cells.length - 1].length) {
+            return false;
+        }
         return cells[row][column];
     }
 
@@ -34,7 +40,7 @@ public class Universe {
         neighbours[0] = getCell(row - 1, column - 1);
         neighbours[1] = getCell(row - 1, column);
         neighbours[2] = getCell(row - 1, column + 1);
-        neighbours[3] = getCell(row , column + 1);
+        neighbours[3] = getCell(row, column + 1);
         neighbours[4] = getCell(row + 1, column + 1);
         neighbours[5] = getCell(row + 1, column);
         neighbours[6] = getCell(row + 1, column - 1);

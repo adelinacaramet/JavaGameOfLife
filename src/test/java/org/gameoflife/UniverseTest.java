@@ -64,16 +64,23 @@ public class UniverseTest {
     }
 
     @Test
-    public void extractNeighboursForCell() {
+    public void extractNeighboursForMiddleCell() {
         Boolean[] neighbours = new Boolean[]{true, true, true, true, true, true, false, false};
         Boolean[] realNeighbours = universe.getNeighbours(1, 1);
         Assert.assertArrayEquals(neighbours, realNeighbours);
     }
 
     @Test
-    public void extractNeighboursForCellAtTheBorder() {
-        Boolean[] neighbours = new Boolean[]{true, true, true, true, true, true, false, false};
-        Boolean[] realNeighbours = universe.getNeighbours(1, 1);
+    public void extractNeighboursForCellAtTheUpperBorder() {
+        Boolean[] neighbours = new Boolean[]{false, false, false, true, false, false, false, false};
+        Boolean[] realNeighbours = universe.getNeighbours(0, 0);
+        Assert.assertArrayEquals(neighbours, realNeighbours);
+    }
+
+    @Test
+    public void extractNeigboursForCellAtTheBottomBorder() {
+        Boolean[] neighbours = new Boolean[]{false, true, false, false, false, false, false, true};
+        Boolean[] realNeighbours = universe.getNeighbours(2, 2);
         Assert.assertArrayEquals(neighbours, realNeighbours);
     }
 
