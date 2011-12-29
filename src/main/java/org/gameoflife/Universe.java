@@ -2,7 +2,7 @@ package org.gameoflife;
 
 public class Universe {
 
-    private Boolean[][] cells; // row
+    private Boolean[][] cells;
 
     public Universe(Boolean[][] cells) {
         this.cells = cells;
@@ -10,11 +10,21 @@ public class Universe {
 
 
     public void turn() {
-        //To change body of created methods use File | Settings | File Templates.
+        Boolean[][] nextState = new Boolean[cells.length][cells[cells.length-1].length];
+        for(int row = 0; row < cells.length; row++) {
+            for(int col = 0; col < cells[cells.length-1].length; col++) {
+                nextState[row][col] = isAliveNextTurn(cells[row][col], getNeighbours(row, col));
+            }
+        }
+        setCells(nextState);
     }
 
     public Boolean[][] getCells() {
         return cells;
+    }
+
+    public void setCells(Boolean[][] cells) {
+        this.cells = cells;
     }
 
     public boolean getCell(int row, int column) {
@@ -27,7 +37,7 @@ public class Universe {
         return cells[row][column];
     }
 
-    public Boolean isAlive(Boolean cell, Boolean[] neighbours) {
+    public Boolean isAliveNextTurn(Boolean cell, Boolean[] neighbours) {
         int count = 0;
         for (Boolean neighbour : neighbours) {
             if (neighbour) count++;
