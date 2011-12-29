@@ -18,6 +18,11 @@ public class UniverseTest {
             {true, false, false},
             {false, true, true},
     };
+    private Boolean[][] nextNextState = new Boolean[][]{
+            {false, true, false},
+            {true, false, false},
+            {false, true, false},
+    };
 
     @Test
     public void cellsHaveInitialState() {
@@ -90,9 +95,15 @@ public class UniverseTest {
         Assert.assertArrayEquals(nextState, universe.getCells());
     }
 
+    @Test
+    public void afterSecondTurnCellsHaveNewState() {
+        universe.turn();
+        universe.turn();
+        Assert.assertArrayEquals(nextNextState, universe.getCells());
+    }
+
     @Before
     public void init() {
         universe = new Universe(initialState);
     }
-
 }
