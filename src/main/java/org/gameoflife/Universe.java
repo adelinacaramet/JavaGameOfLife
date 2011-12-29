@@ -2,7 +2,7 @@ package org.gameoflife;
 
 public class Universe {
 
-    private Boolean[][] cells;
+    private Boolean[][] cells; // row
 
     public Universe(Boolean[][] cells) {
         this.cells = cells;
@@ -15,5 +15,9 @@ public class Universe {
 
     public Boolean[][] getCells() {
         return cells;
+    }
+
+    public boolean getCell(int row, int column) {
+        return cells[row][column];
     }
 }
