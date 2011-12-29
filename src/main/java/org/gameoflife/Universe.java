@@ -20,4 +20,25 @@ public class Universe {
     public boolean getCell(int row, int column) {
         return cells[row][column];
     }
+
+    public Boolean isAlive(Boolean cell, Boolean[] neighbours) {
+        int count = 0;
+        for (Boolean neighbour : neighbours) {
+            if (neighbour) count++;
+        }
+        return (!cell && count == 3) || (cell && count == 2) || (cell && count == 3);
+    }
+
+    public Boolean[] getNeighbours(int row, int column) {
+        Boolean[] neighbours = new Boolean[8];
+        neighbours[0] = getCell(row - 1, column - 1);
+        neighbours[1] = getCell(row - 1, column);
+        neighbours[2] = getCell(row - 1, column + 1);
+        neighbours[3] = getCell(row , column + 1);
+        neighbours[4] = getCell(row + 1, column + 1);
+        neighbours[5] = getCell(row + 1, column);
+        neighbours[6] = getCell(row + 1, column - 1);
+        neighbours[7] = getCell(row, column - 1);
+        return neighbours;
+    }
 }

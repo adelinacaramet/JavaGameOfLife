@@ -2,7 +2,6 @@ package org.gameoflife;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class UniverseTest {
@@ -32,20 +31,58 @@ public class UniverseTest {
 
     }
 
-/*
     @Test
     public void aDeadCellWithExactThreeNeighboursComesAlive() {
-        Boolean state = isAlive(x, y);
+        Boolean cell = false;
+        Boolean[] neighbours = new Boolean[]{true, true, true, false, false, false, false, false};
+        Boolean state = universe.isAlive(cell, neighbours);
         Assert.assertTrue(state);
     }
-*/
 
     @Test
+    public void anAliveCellWithTwoNeighboursRemainsAlive() {
+        Boolean cell = true;
+        Boolean[] neighbours = new Boolean[]{false, true, false, false, false, true, false, false};
+        Boolean state = universe.isAlive(cell, neighbours);
+        Assert.assertTrue(state);
+    }
+
+    @Test
+    public void anAliveCellWithThreeNeighboursRemainsAlive() {
+        Boolean cell = true;
+        Boolean[] neighbours = new Boolean[]{false, true, false, false, true, true, false, false};
+        Boolean state = universe.isAlive(cell, neighbours);
+        Assert.assertTrue(state);
+    }
+
+    @Test
+    public void anAliveCellWithFourNeighboursDies() {
+        Boolean cell = true;
+        Boolean[] neighbours = new Boolean[]{true, true, false, false, true, true, false, false};
+        Boolean state = universe.isAlive(cell, neighbours);
+        Assert.assertFalse(state);
+    }
+
+    @Test
+    public void extractNeighboursForCell() {
+        Boolean[] neighbours = new Boolean[]{true, true, true, true, true, true, false, false};
+        Boolean[] realNeighbours = universe.getNeighbours(1, 1);
+        Assert.assertArrayEquals(neighbours, realNeighbours);
+    }
+
+    @Test
+    public void extractNeighboursForCellAtTheBorder() {
+        Boolean[] neighbours = new Boolean[]{true, true, true, true, true, true, false, false};
+        Boolean[] realNeighbours = universe.getNeighbours(1, 1);
+        Assert.assertArrayEquals(neighbours, realNeighbours);
+    }
+
+/*    @Test
     @Ignore
     public void afterTheTurnCellsHaveNewState() {
         universe.turn();
         Assert.assertArrayEquals(nextState, universe.getCells());
-    }
+    }*/
 
     @Before
     public void init() {
